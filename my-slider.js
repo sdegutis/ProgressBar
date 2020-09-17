@@ -4,7 +4,7 @@ class MySlider extends HTMLElement {
 
     this.shadow = this.attachShadow({ mode: 'closed' });
     this.shadow.innerHTML = /*html*/`
-      <style>
+      <style id="style">
         #slider-container {
           height: 18px;
 
@@ -18,10 +18,6 @@ class MySlider extends HTMLElement {
           top: 0;
           bottom: 0;
           left: 0;
-
-          transition:
-            width ease-out 400ms, 
-            opacity ease-out 400ms;
 
           position: absolute;
 
@@ -71,11 +67,30 @@ class MySlider extends HTMLElement {
     switch (name) {
       case 'percent': {
         const slider = this.shadow.getElementById('slider-bar');
-        slider.style.width = this.percent + '%';
+        this.adjustWidth();
         slider.style.opacity = (this.percent === 0 ? 0 : 1);
         break;
       }
     }
+  }
+
+  adjustWidth() {
+    const availableWidth = this.shadow.getElementById('slider-container').clientWidth;
+    const slider = this.shadow.getElementById('slider-bar');
+    slider.style.width = `${this.percent / 100 * (availableWidth - 18) + 18}px`;
+  }
+
+  connectedCallback() {
+    this.adjustWidth();
+    setTimeout(() => {
+      this.shadow.getElementById('style').append(`
+        #slider-bar {
+          transition:
+            width ease-out 400ms, 
+            opacity ease-out 400ms;
+        }
+      `);
+    }, 0);
   }
 
   increase(amt) {
