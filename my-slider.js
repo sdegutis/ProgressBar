@@ -25,6 +25,12 @@ class MySlider extends HTMLElement {
           border-radius: 9px;
         }
 
+        #slider-bar.animates {
+          transition:
+            width ease-out 400ms, 
+            opacity ease-out 400ms;
+        }
+
         #slider-reflection {
           content: '';
 
@@ -83,13 +89,7 @@ class MySlider extends HTMLElement {
   connectedCallback() {
     this.adjustWidth();
     setTimeout(() => {
-      this.shadow.getElementById('style').append(`
-        #slider-bar {
-          transition:
-            width ease-out 400ms, 
-            opacity ease-out 400ms;
-        }
-      `);
+      this.shadow.getElementById('slider-bar').classList.add('animates');
     }, 0);
   }
 
