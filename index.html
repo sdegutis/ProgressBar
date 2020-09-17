@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="./my-slider.js"></script>
+</head>
+
+<body>
+
+  <div style="width: 300px">
+    <my-slider id="slider" percent="30"></my-slider>
+  </div>
+
+  <br>
+
+  <button onclick="document.getElementById('slider').increase(10)">Increase</button>
+  <button onclick="document.getElementById('slider').increase(-10)">Decrease</button>
+  <button onclick="document.getElementById('slider').percent = 0">Empty</button>
+  <button onclick="document.getElementById('slider').percent = 100">Full</button>
+
+</body>
+
+</html>
