@@ -71,9 +71,7 @@ class MySlider extends HTMLElement {
     switch (name) {
       case 'percent': {
         const slider = this.shadow.getElementById('slider-bar');
-        console.log(this.shadow.getElementById('slider-container').clientWidth);
-        const availableWidth = this.shadow.getElementById('slider-container').clientWidth - 18;
-        slider.style.width = `${this.percent / 100 * availableWidth + 18}%`;
+        slider.style.width = this.percent + '%';
         slider.style.opacity = (this.percent === 0 ? 0 : 1);
         break;
       }
